@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BlueLog App</string>
+    <string name="action_settings">Configuracion</string>
+    <string name="hello_world">Hola Mundo</string>
+    <string name="none_paired">Ningun dispositivo pudo ser emparejado</string>
+    <string name="Init">Esta aplicacion permite realizar actualizar y configuracion tanto los datos de Fecha y Hora, como los parametros de funcionaminto del dipositivo BlueLog.</string>
+</resources>

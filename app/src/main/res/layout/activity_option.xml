@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.viper2.blogg_app.OptionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignMargins"
+            android:columnCount="1"
+            android:rowCount="2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/Init"
+            android:layout_margin="1dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:id="@+id/txt0"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alignmentMode="alignMargins"
+                    android:columnCount="1"
+                    android:rowCount="4">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:text="btn1"
+                        android:layout_margin="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:id="@+id/btn1"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:text="btn2"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:id="@+id/btn2"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:text="btn3"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:id="@+id/btn3"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:text="btn4"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:id="@+id/btn4"/>
+
+                </GridLayout>
+            </LinearLayout>
+        </GridLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
