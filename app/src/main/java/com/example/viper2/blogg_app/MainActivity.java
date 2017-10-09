@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bBluetooth = (Button) findViewById(R.id.bBluetooth);
+        //bBluetooth = (Button) findViewById(R.id.bBluetooth);
        // imagen=(ImageView)findViewById(R.id.blue);
         adaptador=BluetoothAdapter.getDefaultAdapter();
         if (adaptador==null){
@@ -50,13 +50,13 @@ public class MainActivity extends AppCompatActivity {
         else{
           //  setimageblue(adaptador.isEnabled());}
             adaptador.isEnabled();}
-
+        /*
         bBluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setestadoblue();
+                //setestadoblue();
 
-          /*
+
             if(eUsername.getText().toString().equals("") || ePassword.getText().toString().equals("")){
                 Toast.makeText(getApplicationContext(), "Error \n Alguno o ambos espacios estan vacios", Toast.LENGTH_SHORT).show();
             }
@@ -79,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-            */
+
             }
 
         });
+        */
     }
 
     /*
@@ -167,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    /*
     //para saber si el bth esta activo o no?
     public void setestadoblue()
     {
@@ -181,5 +183,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Bluetooth Enable", Toast.LENGTH_SHORT).show();
         }
     }
+    */
     //fin de las funciones
 }

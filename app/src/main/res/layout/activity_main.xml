@@ -7,32 +7,13 @@
     android:orientation="vertical"
     tools:context="com.example.viper2.blogg_app.MainActivity">
 
-
-    <TextView
+    <TextView android:id="@+id/title_paired_devices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Prueba de boton bluetooth"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        android:textStyle="bold"/>
-
-     <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bluetooth"
-            android:background="@color/colorPrimaryDark"
-            android:textSize="25sp"
-            android:id="@+id/bBluetooth"/>
-    <TextView android:id="@+id/title_paired_devices"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Seleccione un dispositivo btSerial "
-        android:visibility="gone"
-        android:background="#666"
-        android:textColor="#fff"
-        android:paddingLeft="5dp"
+        android:text="Seleccione un dispositivo btSerial"
+        android:textSize="15dp"
         />
     <ListView android:id="@+id/paired_devices"
         android:layout_width="match_parent"
@@ -40,28 +21,19 @@
         android:stackFromBottom="false"
         android:layout_weight="1"
         />
-
     <TextView
         android:id="@+id/connecting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <TextView
         android:id="@+id/infoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Si no hay dispositivos en la lista, por favor enlaza tu dispositivo en la configuración de Android"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_margin="5dp"
-        android:textSize="18dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-    </LinearLayout>
+        android:layout_margin="20dp"
+        android:textSize="15dp" />
 
 </LinearLayout>
 
