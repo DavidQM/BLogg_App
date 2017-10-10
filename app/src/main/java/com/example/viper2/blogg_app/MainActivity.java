@@ -1,5 +1,9 @@
 package com.example.viper2.blogg_app;
 
+/*
+https://wingoodharry.wordpress.com/2014/04/15/android-sendreceive-data-with-arduino-using-bluetooth-part-2/
+
+ */
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this, OptionActivity.class);
             i.putExtra(EXTRA_DEVICE_ADDRESS, address);
             startActivity(i);
+            finish();
 
         }
     };

@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OptionActivity">
+        <activity android:name=".OptionActivity"></activity>
+        <activity android:name=".ConfigActivity">
 
         </activity>
     </application>

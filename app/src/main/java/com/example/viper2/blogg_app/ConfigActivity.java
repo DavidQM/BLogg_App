@@ -1,5 +1,10 @@
 package com.example.viper2.blogg_app;
+/*
+https://neurobin.org/docs/android/android-time-picker-example/
+http://www.technotalkative.com/android-get-current-date-and-time/
 
+https://danielme.com/2013/04/25/diseno-android-spinner/
+ */
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -10,34 +15,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Calendar;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.UUID;
 
-public class OptionActivity extends AppCompatActivity {
-
+public class ConfigActivity extends AppCompatActivity {
 
     private static final String TAG = "Read";
+    Handler bluetoothIn;
 
-    // EXTRA string to send on to mainactivity
-    public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    Date currentTime = Calendar.getInstance().getTime();
 
-   private static Handler bluetoothIn;
-
-    Button btn1,btn2,btn3,btn4;
+    Button btnSend;
     TextView txt1,txt2,txt3;
+    Spinner sPack;
 
-    static final int handlerState = 0;        				 //used to identify handler message
+    final int handlerState = 0;        				 //used to identify handler message
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
     private StringBuilder recDataString = new StringBuilder();
 
-    private ConnectedThread mConnectedThread;
+    private OptionActivity.ConnectedThread mConnectedThread;
 
     // SPP UUID service - this should work for most devices
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -49,7 +58,7 @@ public class OptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_option);
+        setContentView(R.layout.activity_config);
 
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -59,12 +68,8 @@ public class OptionActivity extends AppCompatActivity {
                     int endOfLineIndex = recDataString.indexOf("\n");                    // determine the end-of-line
                     if (endOfLineIndex > 0) {                                           // make sure there data before ~
                         String dataInPrint = recDataString.substring(0, endOfLineIndex);    // extract string
-                        //txt1.setText("D_Rx = " + dataInPrint);
-                        int dataLength = dataInPrint.length();                          //get length of data received
-                        //txtStringLength.setText("String Length = " + String.valueOf(dataLength));
-                        if (recDataString.charAt(0) == '+')                             //if it starts with # we know it is what we are looking for
+                       if (recDataString.charAt(0) == '+')                             //if it starts with # we know it is what we are looking for
                         {
-
                             //YY/MY/DD/W/HA/MA/HI/MI/FF/N/MS
                             String DD = recDataString.substring(1, 3);
                             String MY = recDataString.substring(4, 6);
@@ -77,94 +82,54 @@ public class OptionActivity extends AppCompatActivity {
                             String FF = recDataString.substring(29, 31);
                             String MS = recDataString.substring(32, 34);
                             //hacer calculo para N
-
+                            /*
                             txt1.setText(" Date = " + DD + "/"+ MY + "/"+ YY + " Time = "+ HA + ":" + MA);
                             txt2.setText(" Start Time = " + HI + ":" + MI );
                             txt3.setText(" N(Pack) = " + N + " F(Hz) = " + FF+ " Break Time =" + MS);
+                            */
 
-                            //txt3.setText("D_Rx = " + dataInPrint);
                         }
-                        if (recDataString.charAt(0) == '-')                             //if it starts with # we know it is what we are looking for
-                        {
-                            String Temp = recDataString.substring(1, 3);
-                            String Presion = recDataString.substring(4, 9);
 
-                            txt1.setText("Check Sensor Status");
-                            txt2.setText(" Temp (C) = " + Temp);
-                            txt3.setText(" P(Bar) = " + Presion);
-                        }
                         recDataString.delete(0, recDataString.length());                    //clear all string data
-                        // strIncom =" ";
                         dataInPrint = " ";
                     }
                 }
             }
         };
-
+        ////
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
 
-        btn1 = (Button) findViewById(R.id.btn1);
-        btn2 = (Button) findViewById(R.id.btn2);
-        btn3 = (Button) findViewById(R.id.btn3);
-        btn4 = (Button) findViewById(R.id.btn4);
+        btnSend = (Button) findViewById(R.id.btnSend);
+        sPack = (Spinner) findViewById(R.id.sPack);
 
-        txt1 = (TextView) findViewById(R.id.txt1);
-        txt2 = (TextView) findViewById(R.id.txt2);
-        txt3 = (TextView) findViewById(R.id.txt3);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Pack, R.layout.spinner_item);
+        sPack.setAdapter(adapter);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+        sPack.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                Toast.makeText(getBaseContext(),"Data N = "+Integer.toString(i), Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //mConnectedThread.write("1");    // Send "0" via Bluetooth
-               // Toast.makeText(getBaseContext(), "boton 1", Toast.LENGTH_SHORT).show();
-                txt1.setText("");
-                txt2.setText("");
-                txt3.setText("");
-                Intent i = new Intent(OptionActivity.this, ConfigActivity.class);
+
+                mConnectedThread.write("1");    // Send "Config" via Bluetooth
+                /*
+                Intent i = new Intent(ConfigActivity.this, OptionActivity.class);
                 i.putExtra(EXTRA_DEVICE_ADDRESS,address);
                 startActivity(i);
                 finish();
+                */
             }
         });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("+");    // Send "0" via Bluetooth
-                //Toast.makeText(getBaseContext(), "boton 2", Toast.LENGTH_SHORT).show();
-                txt1.setText("");
-                txt2.setText("");
-                txt3.setText("");
-            }
-        });
-        btn3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("-");    // Send "0" via Bluetooth
-                //Toast.makeText(getBaseContext(), "boton 3", Toast.LENGTH_SHORT).show();
-                txt1.setText("");
-                txt2.setText("");
-                txt3.setText("");
-            }
-        });
-        btn4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //mConnectedThread.write("2");    // Send "0" via Bluetooth
-                //Toast.makeText(getBaseContext(), "boton 4", Toast.LENGTH_SHORT).show();
-                txt1.setText("");
-                txt2.setText("");
-                txt3.setText("");
-                //btAdapter.disable();
-                try {
-                    btSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Intent i = new Intent(OptionActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-
-
 
     }
 
@@ -176,16 +141,11 @@ public class OptionActivity extends AppCompatActivity {
 
     public void onResume() {
         super.onResume();
-
         //Get MAC address from DeviceListActivity via intent
         Intent intent = getIntent();
-
         //Get the MAC address from the DeviceListActivty via EXTRA
-        address = intent.getStringExtra(MainActivity.EXTRA_DEVICE_ADDRESS);
-        //create device and set the MAC address
-        //Log.i("ramiro", "adress : " + address);
+        address = intent.getStringExtra(OptionActivity.EXTRA_DEVICE_ADDRESS);
         BluetoothDevice device = btAdapter.getRemoteDevice(address);
-        //Toast.makeText(getBaseContext(), address, Toast.LENGTH_LONG).show();
 
         try {
             btSocket = createBluetoothSocket(device);
@@ -206,23 +166,9 @@ public class OptionActivity extends AppCompatActivity {
             }
         }
 
-        mConnectedThread = new ConnectedThread(btSocket);
-        mConnectedThread.start();
-
-        //I send a character when resuming.beginning transmission to check device is connected
-        //If it is not an exception will be thrown in the write method and finish() will be called
-        //mConnectedThread.write("-");
-
+       /// mConnectedThread = new OptionActivity.ConnectedThread(btSocket);
+        //mConnectedThread.start();
     }
-
-    /*
-    @Override
-    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
-
-        return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
-        //creates secure outgoing connecetion with BT device using UUID
-    }
-    */
 
     //Checks that the Android device Bluetooth is available and prompts to be turned on if off
     private void checkBTState() {
@@ -237,8 +183,6 @@ public class OptionActivity extends AppCompatActivity {
             }
         }
     }
-
-    //create new class for connect thread
 
     class ConnectedThread extends Thread {
         private final InputStream mmInStream;
@@ -259,11 +203,10 @@ public class OptionActivity extends AppCompatActivity {
             mmOutStream = tmpOut;
 
         }
-        
+
         public void run() {
             byte[] buffer = new byte[256];
             int bytes;
-
             // Keep looping to listen for received messages
             while (true) {
 
@@ -271,20 +214,10 @@ public class OptionActivity extends AppCompatActivity {
                     bytes = mmInStream.read(buffer);        	//read bytes from input buffer
                     String readMessage = new String(buffer, 0, bytes);
                     // Send the obtained bytes to the UI Activity via handler
-                   bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
-                    //box= bluetoothIn.toString();
-                    //Toast.makeText(getBaseContext(), readMessage, Toast.LENGTH_LONG).show();
-                    //readMessage.replace('\n',' ');
-                   // box= readMessage;
-                   //Log.d(TAG, box);
-                   //Toast.makeText(getBaseContext(), box, Toast.LENGTH_LONG).show();
-                    //box=null;
-                    //txt1.setText(readMessage);
+                    bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
                 } catch (IOException e) {
                     break;
                 }
-
-                //Toast.makeText(getBaseContext(), "Read", Toast.LENGTH_LONG).show();
             }
         }
         //write method
@@ -296,19 +229,11 @@ public class OptionActivity extends AppCompatActivity {
             } catch (IOException e) {
                 //if you cannot write, close the application
                 Toast.makeText(getBaseContext(), "La Conexión fallo", Toast.LENGTH_LONG).show();
-                /*
-                try {
-                    btSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                */
-                Intent i = new Intent(OptionActivity.this, MainActivity.class);
+                Intent i = new Intent(ConfigActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
 
             }
         }
     }
-
 }

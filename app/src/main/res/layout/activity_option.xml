@@ -20,29 +20,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/Init"
-            android:layout_margin="1dp"
+            android:text="@string/app_name"
+            android:layout_margin="2dp"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:id="@+id/txt0"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
+                android:layout_margin="10dp"
                 android:gravity="center">
                 <GridLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alignmentMode="alignMargins"
                     android:layout_gravity="center"
-                    android:columnCount="2"
-                    android:rowCount="2">
+                    android:columnCount="1"
+                    android:rowCount="4">
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_weight="2"
                         android:layout_gravity="center"
-                        android:text="btn1"
-                        android:layout_margin="10dp"
+                        android:text="Current Setting"
+                        android:layout_margin="2dp"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:id="@+id/btn1"/>
@@ -50,8 +50,8 @@
                         android:layout_width="wrap_content"
                         android:layout_weight="2"
                         android:layout_gravity="center"
-                        android:text="btn2"
-                        android:layout_margin="10dp"
+                        android:text="Value Setup"
+                        android:layout_margin="2dp"
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -61,8 +61,8 @@
                         android:layout_width="wrap_content"
                         android:layout_weight="2"
                         android:layout_gravity="center"
-                        android:text="btn3"
-                        android:layout_margin="10dp"
+                        android:text="Check Sensor Status"
+                        android:layout_margin="2dp"
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -72,8 +72,8 @@
                         android:layout_width="wrap_content"
                         android:layout_weight="2"
                         android:layout_gravity="center"
-                        android:text="btn4"
-                        android:layout_margin="10dp"
+                        android:text="Disconnect"
+                        android:layout_margin="2dp"
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -90,9 +90,23 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:id="@+id/txt1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="1dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:id="@+id/txt2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="1dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:id="@+id/txt3"/>
         </GridLayout>
     </LinearLayout>
-
-
 
 </LinearLayout>

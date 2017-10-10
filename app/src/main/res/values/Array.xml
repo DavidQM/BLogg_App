@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Speed">
+        <item>1 Hz</item>
+        <item>2 Hz</item>
+        <item>3 Hz</item>
+        <item>4 Hz</item>
+        <item>5 Hz</item>
+        <item>6 Hz</item>
+        <item>7 Hz</item>
+        <item>8 Hz</item>
+        <item>9 Hz</item>
+    </string-array>
+    <string-array name="Pack">
+        <item>254</item>
+        <item>512</item>
+        <item>1024</item>
+        <item>2048</item>
+    </string-array>
+</resources>
